@@ -19,6 +19,7 @@ class ArticleDetailResource extends JsonResource
             'title' => $this->title,
             'text' => $this->text,
             'author' => $this->author,
+            'sub_only' => $this->sub_only,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'comments' => CommentResource::collection($this->comments),
