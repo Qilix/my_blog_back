@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
+use App\Article\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 
