@@ -4,12 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArticleStoreRequest extends FormRequest
+class ArticleCreateRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return true;
-    }
 
     public function rules()
     {
@@ -18,6 +14,7 @@ class ArticleStoreRequest extends FormRequest
             'text' => 'required|string',
             'author' => 'required|string',
             'sub_only' => 'boolean',
+            'comments' => '',
         ];
     }
 }
