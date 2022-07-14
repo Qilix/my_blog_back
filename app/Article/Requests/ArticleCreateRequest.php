@@ -12,7 +12,6 @@ class ArticleCreateRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'text' => 'required|string',
-            'author' => 'required|string',
             'sub_only' => 'boolean',
             'comments' => '',
         ];

@@ -8,18 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
 
-    // protected $fillable = ['title', 'text', 'sub_only', 'author'];
     protected $guarded = [];
 
     use HasFactory;
 
-    public function author()
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class, 'id', 'author');
     }
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'article_id');
     }
 }
