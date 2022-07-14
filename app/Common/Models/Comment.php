@@ -11,11 +11,11 @@ class Comment extends Model
 
     public function article()
     {
-        return $this->belongsTo(Article::class);
+        return $this->hasOne(Article::class, 'id', 'article_id');
     }
 
-    public function author()
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class, 'id', 'author');
     }
 }

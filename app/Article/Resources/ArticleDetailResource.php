@@ -2,22 +2,23 @@
 
 namespace App\Article\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-use App\Comment\Resources\CommentResource;
+use Carbon\Carbon;
 
-class ArticleDetailResource extends JsonResource
+class ArticleDetailResource
 {
-    public function toArray($request)
-    {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'text' => $this->text,
-            'author' => $this->author,
-            'sub_only' => $this->sub_only,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'comments' => CommentResource::collection($this->comments),
-        ];
-    }
+    public int $id;
+
+    public string $title;
+
+    public string $text;
+
+    public string $author;
+
+    public bool $sub_only;
+
+    public Carbon $created_at;
+
+    public Carbon $updated_at;
+
+    public array $comments;
 }

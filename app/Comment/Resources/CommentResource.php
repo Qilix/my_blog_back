@@ -2,25 +2,19 @@
 
 namespace App\Comment\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
-class CommentResource extends JsonResource
+class CommentResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
-    public function toArray($request)
-    {
-        return [
-            'id' => $this->id,
-            'body' => $this->body,
-            'article_id' => $this->article_id,
-            'author' => $this->author,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ];
-    }
+    public int $id;
+
+    public string $body;
+
+    public int $article_id;
+
+    public int $author;
+
+    public Carbon $created_at;
+
+    public Carbon $updated_at;
 }

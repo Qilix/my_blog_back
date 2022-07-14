@@ -13,17 +13,19 @@ Route::prefix('posts')->name('posts.')->group(function () {
     Route::get('/', [ArticleController::class, 'index']);
     Route::get('/{id}', [ArticleController::class, 'show']);
 
-    Route::post('/', [ArticleController::class, 'create']);
-    Route::put('/{id}', [ArticleController::class, 'update']);
-    Route::delete('/{id}', [ArticleController::class, 'destroy']);
+    Route::middleware('auth:api')->group(function () {
+        Route::post('/', [ArticleController::class, 'create']);
+        Route::put('/{id}', [ArticleController::class, 'update']);
+        Route::delete('/{id}', [ArticleController::class, 'destroy']);
+    });
 });
 
 
-Route::middleware('auth:api')->prefix('posts/{id}')->name('comments.')->group(function () {
-    Route::post('/', [CommentController::class, 'create']);
-    Route::put('/{id}', [CommentController::class, 'update']);
-    Route::delete('/{id}', [CommentController::class, 'destroy']);
-});
+// Route::->prefix('posts/{id}')->name('comments.')->group(function () {
+//     Route::post('/', [CommentController::class, 'create']);
+//     Route::put('/{id}', [CommentController::class, 'update']);
+//     Route::delete('/{id}', [CommentController::class, 'destroy']);
+// });
 
 // Route::post('register', [UserController::class, 'register']);
 // Route::middleware('auth_api')->prefix('users')->name('users.')->group(function () {
