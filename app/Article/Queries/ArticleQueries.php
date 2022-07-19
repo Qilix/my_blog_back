@@ -11,4 +11,9 @@ class ArticleQueries
     {
         return Article::all();
     }
+
+    public function getDetail($id): Article
+    {
+        return Article::with('comments')->findOrFail($id);
+    }
 }

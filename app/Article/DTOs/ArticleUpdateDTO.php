@@ -3,7 +3,7 @@
 namespace App\Article\DTOs;
 
 
-class ArticleCreateDTO
+class ArticleUpdateDTO
 {
     public string $title;
 

@@ -6,6 +6,7 @@ use App\comment\Resources\CommentResource;
 use App\Common\Models\Comment;
 use Illuminate\Database\Eloquent\Collection;
 
+
 class CommentPresenter
 {
     public function present(Comment $comment): CommentResource
