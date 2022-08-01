@@ -2,83 +2,38 @@
 
 namespace App\Comment\Controllers;
 
+use App\Comment\DTOs\CommentCreateDTO;
 use Illuminate\Routing\Controller;
 use App\Common\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
     public function show(Comment $comment)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comment $comment)
+    public function create(ArticleCreateRequest $request, ArticleDetailPresenter $presenter, ArticleServices $service)
     {
-        //
+        $dto = ArticleCreateFactory::fromRequest($request);
+        $model = $service->createArticle($dto, Auth::user());
+        return Response::json($presenter->present($model));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Comment $comment)
+    public function update($id, ArticleUpdateRequest $request, ArticleDetailPresenter $presenter, ArticleServices $service, ArticleQueries $queries)
     {
-        //
+        $dto = ArticleUpdateFactory::fromRequest($request);
+        $model = $service->updateArticle($id, $queries, $dto, Auth::user());
+        return Response::json($presenter->present($model));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Comment $comment)
     {
         //

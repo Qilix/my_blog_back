@@ -15,7 +15,6 @@ class CommentStoreRequest extends FormRequest
     {
         return [
             'body' => 'required|string',
-            'author' => 'required|string',
         ];
     }
 }
