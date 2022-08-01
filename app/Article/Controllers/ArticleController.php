@@ -2,15 +2,12 @@
 
 namespace App\Article\Controllers;
 
-use App\Common\Models\Article;
 
 use App\Article\Factories\ArticleCreateFactory;
 use App\Article\Factories\ArticleUpdateFactory;
 use App\Article\Presenters\ArticleDetailPresenter;
 use App\Article\Presenters\ArticlePresenter;
 use App\Article\Queries\ArticleQueries;
-use App\Article\Resources\ArticleResource;
-use App\Article\Resources\ArticleDetailResource;
 use App\Article\Requests\ArticleCreateRequest;
 use App\Article\Requests\ArticleUpdateRequest;
 use App\Article\Services\ArticleServices;
@@ -39,15 +36,16 @@ class ArticleController extends Controller
         return Response::json($presenter->present($model));
     }
 
-    public function update(ArticleUpdateRequest $request, ArticleDetailPresenter $presenter, ArticleServices $service, $id)
+    public function update($id, ArticleUpdateRequest $request, ArticleDetailPresenter $presenter, ArticleServices $service, ArticleQueries $queries)
     {
         $dto = ArticleUpdateFactory::fromRequest($request);
-        $model = $service->updateArticle($dto, Auth::user(), $id);
+        $model = $service->updateArticle($id, $queries, $dto, Auth::user());
         return Response::json($presenter->present($model));
     }
 
-    public function destroy($id)
+    public function destroy($id, ArticleServices $service, ArticleQueries $queries)
     {
-        return Article::destroy($id);
+        $service->deleteArticle($id, $queries, Auth::user());
+        return Response::json(['message' => 'Successfully deleted']);
     }
 }
