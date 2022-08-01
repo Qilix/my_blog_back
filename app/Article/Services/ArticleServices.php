@@ -4,13 +4,14 @@ namespace App\Article\Services;
 
 use App\Article\DTOs\ArticleCreateDTO;
 use App\Article\DTOs\ArticleUpdateDTO;
+use App\Article\Queries\ArticleQueries;
 use App\Common\Models\Article;
 use App\Common\Models\User;
 
 class ArticleServices
 {
 
-    public function createArticle(ArticleCreateDTO $dto, User $user): Article
+    public function createArticle(ArticleCreateDTO $dto, $user): Article
     {
         $article = new Article();
 
@@ -24,9 +25,9 @@ class ArticleServices
         return $article;
     }
 
-    public function updateArticle(ArticleUpdateDTO $dto, User $user, $id): Article
+    public function updateArticle($id, ArticleQueries $quaries, ArticleUpdateDTO $dto, $user): Article
     {
-        $article = Article::find($id);
+        $article = $quaries->getAuthorDetail($id, $user);
 
         $article->title = $dto->title;
         $article->text = $dto->text;
@@ -37,4 +38,11 @@ class ArticleServices
         return $article;
     }
 
+    public function deleteArticle($id, ArticleQueries $queries, User $user)
+    {
+
+        $article = $queries->getAuthorDetail($id, $user);
+
+        $article->delete();
+    }
 }

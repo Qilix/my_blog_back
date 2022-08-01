@@ -20,7 +20,7 @@ class ArticleDetailPresenter
         $resource->id = $article->id;
         $resource->title = $article->title;
         $resource->text = $article->text;
-        $resource->author = $article->author;
+        $resource->author = $article->user->name;
         $resource->sub_only = $article->sub_only;
         $resource->created_at = $article->created_at;
         $resource->updated_at = $article->updated_at;
