@@ -15,6 +15,7 @@ use App\Common\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 
+
 class ArticleController extends Controller
 {
     public function index(ArticleQueries $queries, ArticlePresenter $presenter)

@@ -7,5 +7,4 @@ class CommentUpdateDTO
 {
     public string $body;
 
-    public int $article_id;
 }

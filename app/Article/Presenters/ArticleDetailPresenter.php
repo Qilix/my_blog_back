@@ -5,7 +5,7 @@ namespace App\Article\Presenters;
 use App\Article\Resources\ArticleDetailResource;
 use App\Common\Models\Article;
 use App\Comment\Presenters\CommentPresenter;
-use Illuminate\Database\Eloquent\Collection;
+
 
 class ArticleDetailPresenter
 {

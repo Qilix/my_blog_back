@@ -11,12 +11,12 @@ use App\Common\Models\User;
 class CommentServices
 {
 
-    public function createComment(CommentCreateDTO $dto, User $user): Comment
+    public function createComment(CommentCreateDTO $dto, $user, $article_id): Comment
     {
         $comment = new Comment();
 
         $comment->body = $dto->body;
-        $comment->article_id = $dto->article_id;
+        $comment->article_id = $article_id;
         $comment->author = $user->id;
 
         $comment->save();
@@ -24,16 +24,21 @@ class CommentServices
         return $comment;
     }
 
-    public function updateComment($id, CommentQueries $quaries,CommentUpdateDTO $dto, User $user): Comment
+    public function updateComment($comment_id, CommentQueries $quaries,CommentUpdateDTO $dto, $user): Comment
     {
-        $comment = $quaries->getDetail($id);
+        $comment = $quaries->getDetail($comment_id, $user);
 
         $comment->body = $dto->body;
-        $comment->article_id = $dto->article_id;
 
         $comment->save();
 
         return $comment;
     }
 
+    public function deleteComment($comment_id, CommentQueries $queries, $user)
+    {
+        $comment = $queries->getDetail($comment_id, $user);
+
+        $comment->delete();
+    }
 }

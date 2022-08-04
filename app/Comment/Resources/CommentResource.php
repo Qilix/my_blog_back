@@ -10,9 +10,7 @@ class CommentResource
 
     public string $body;
 
-    public int $article_id;
-
-    public int $author;
+    public string $author;
 
     public Carbon $created_at;
 

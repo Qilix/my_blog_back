@@ -2,40 +2,38 @@
 
 namespace App\Comment\Controllers;
 
-use App\Comment\DTOs\CommentCreateDTO;
-use Illuminate\Routing\Controller;
-use App\Common\Models\Comment;
-use Illuminate\Http\Request;
+
+use App\Comment\Factories\CommentCreateFactory;
+use App\Comment\Factories\CommentUpdateFactory;
+use App\Comment\Presenters\CommentPresenter;
+use App\Comment\Queries\CommentQueries;
+use App\Comment\Requests\CommentCreateRequest;
+use App\Comment\Services\CommentServices;
+use App\Common\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
+
 
 class CommentController extends Controller
 {
 
-    public function index()
+    public function create($article_id,CommentCreateRequest $request, CommentPresenter $presenter, CommentServices $service)
     {
-        //
-    }
-
-    public function show(Comment $comment)
-    {
-        //
-    }
-
-    public function create(ArticleCreateRequest $request, ArticleDetailPresenter $presenter, ArticleServices $service)
-    {
-        $dto = ArticleCreateFactory::fromRequest($request);
-        $model = $service->createArticle($dto, Auth::user());
+        $dto = CommentCreateFactory::fromRequest($request);
+        $model = $service->createComment($dto, Auth::user(), $article_id);
         return Response::json($presenter->present($model));
     }
 
-    public function update($id, ArticleUpdateRequest $request, ArticleDetailPresenter $presenter, ArticleServices $service, ArticleQueries $queries)
+    public function update($article_id, $comment_id, CommentCreateRequest $request, CommentPresenter $presenter, CommentServices $service, CommentQueries $queries)
     {
-        $dto = ArticleUpdateFactory::fromRequest($request);
-        $model = $service->updateArticle($id, $queries, $dto, Auth::user());
+        $dto = CommentUpdateFactory::fromRequest($request);
+        $model = $service->updateComment($comment_id, $queries, $dto, Auth::user());
         return Response::json($presenter->present($model));
     }
 
-    public function destroy(Comment $comment)
+    public function destroy($article_id, $comment_id,CommentServices $service, CommentQueries $queries)
     {
-        //
+        $service->deleteComment($comment_id, $queries, Auth::user());
+        return Response::json(['message' => 'Successfully deleted']);
     }
 }

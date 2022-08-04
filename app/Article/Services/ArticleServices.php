@@ -40,7 +40,6 @@ class ArticleServices
 
     public function deleteArticle($id, ArticleQueries $queries, User $user)
     {
-
         $article = $queries->getAuthorDetail($id, $user);
 
         $article->delete();

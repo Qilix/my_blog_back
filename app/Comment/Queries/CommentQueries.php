@@ -7,21 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class CommentQueries
 {
-    public function get(): Collection
-    {
-        return Comment::all();
-    }
 
-    public function getDetail($id): Comment
+    public function getDetail($comment_id, $user): Comment
     {
-        return Comment::with('comments')->findOrFail($id);
-    }
-
-    public function getAuthorDetail($id, User $user): Comment{
-        $author = Comment::findOrFail($id)->where('author', $user);
-        if (!$author){
-            return dd("error");
-        }
-        return Comment::with('comments')->findOrFail($id);
+        return Comment::where('author',$user->id)->findOrFail($comment_id);
     }
 }

@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+
+    protected $guarded = [];
+    protected $fillable = ['article_id'];
+
     use HasFactory;
 
     public function article()
