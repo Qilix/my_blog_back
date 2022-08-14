@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use App\Common\Models\Article;
 use App\Common\Models\User;
 use App\Common\Models\Comment;
@@ -14,9 +12,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        // User::factory()->count(10)->create();
-        // Article::factory()->count(10)->create();
-        // Comment::factory()->count(50)->create();
 
         $string = new StringGenerator;
         foreach (range(1, 10) as $i) {
@@ -31,7 +26,8 @@ class DatabaseSeeder extends Seeder
         foreach (range(1, 15) as $i) {
             Article::create([
                 'title' => $string::generate_string(10),
-                'text' => $string::generate_string(50),
+                'description' => $string::generate_string(50),
+                'text' => $string::generate_string(200),
                 'sub_only' => rand(0, 1),
                 'author' => User::get()->random()->id,
             ]);

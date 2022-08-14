@@ -10,6 +10,8 @@ class ArticleResource
 
     public string $title;
 
+    public string $description;
+
     public string $author;
 
     public bool $sub_only;

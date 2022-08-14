@@ -3,22 +3,27 @@
 namespace App\Article\Queries;
 
 use App\Common\Models\Article;
-use Illuminate\Database\Eloquent\Collection;
 
 class ArticleQueries
 {
-    public function get(): Collection
+    public function get()
     {
-        return Article::all();
+        $data = Article::orderBy('id', 'desc')->paginate(3);
+
+        return $data;
+
     }
 
-    public function getDetail($id): Article
+    public function getDetail($ide): Article
     {
+        $id = (int) $ide;
         return Article::with('comments')->findOrFail($id);
+
     }
 
-    public function getAuthorDetail($id, $user): Article
+    public function getAuthorDetail($ide, $user): Article
     {
+        $id = (int) $ide;
         $article = Article::where('author', $user->id)->findOrFail($id);
 
         return $article;

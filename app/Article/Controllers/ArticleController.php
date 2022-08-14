@@ -21,7 +21,7 @@ class ArticleController extends Controller
     public function index(ArticleQueries $queries, ArticlePresenter $presenter)
     {
         $articles = $queries->get();
-        return Response::json($presenter->collect($articles));
+        return Response::json(['data'=>$presenter->collect($articles),'total' => $articles->total()]);
     }
 
     public function show($id, ArticleQueries $queries, ArticleDetailPresenter $presenter)
