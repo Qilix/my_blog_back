@@ -42,6 +42,7 @@ return [
     */
 
     'debug' => (bool) env('APP_DEBUG', false),
+    'verify_csrf' => (bool) env( 'APP_VERIFY_CSRF', true),
 
     /*
     |--------------------------------------------------------------------------

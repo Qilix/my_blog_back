@@ -14,16 +14,16 @@ class ArticleQueries
 
     }
 
-    public function getDetail($ide): Article
+    public function getDetail($id): Article
     {
-        $id = (int) $ide;
+//        $id = (int) $ide;
         return Article::with('comments')->findOrFail($id);
 
     }
 
-    public function getAuthorDetail($ide, $user): Article
+    public function getAuthorDetail($id, $user): Article
     {
-        $id = (int) $ide;
+//        $id = (int) $ide;
         $article = Article::where('author', $user->id)->findOrFail($id);
 
         return $article;
