@@ -13,6 +13,7 @@ class ArticleUpdateFactory
         $dto = new ArticleUpdateDTO();
 
         $dto->title = $request->get('title');
+        $dto->description = $request->get('description');
         $dto->text = $request->get('text');
         $dto->sub_only = $request->get('sub_only');
 

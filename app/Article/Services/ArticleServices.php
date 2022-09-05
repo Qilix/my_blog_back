@@ -16,6 +16,7 @@ class ArticleServices
         $article = new Article();
 
         $article->title = $dto->title;
+        $article->description = $dto->description;
         $article->text = $dto->text;
         $article->author = $user->id;
         $article->sub_only = $dto->sub_only;
@@ -30,7 +31,9 @@ class ArticleServices
         $article = $quaries->getAuthorDetail($id, $user);
 
         $article->title = $dto->title;
+        $article->description = $dto->description;
         $article->text = $dto->text;
+
         $article->sub_only = $dto->sub_only;
 
         $article->save();

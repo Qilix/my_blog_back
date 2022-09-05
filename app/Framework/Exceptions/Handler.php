@@ -45,15 +45,15 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-//        $this->reportable(function (Throwable $e) {
-//            //
-//        });
+        $this->reportable(function (Throwable $e) {
+            //
+        });
         $this->renderable(function (NotFoundHttpException $e, $request) {
             if ($request->is('api/*')) {
                 if ($e->getPrevious() instanceof ModelNotFoundException) {
                     return response()->json([
-                        'status' => 204,
-                        'message' => 'Data not found'
+                        'status' => 403,
+                        'message' => 'Not access'
                     ], 200);
                 }
                 return response()->json([
