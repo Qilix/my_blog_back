@@ -9,23 +9,21 @@ class ArticleQueries
     public function get()
     {
         $data = Article::orderBy('id', 'desc')->paginate(3);
-
         return $data;
 
     }
 
     public function getDetail($id): Article
     {
-//        $id = (int) $ide;
-        return Article::with('comments')->findOrFail($id);
+        return Article::with(['comments' => function($query){
+            $query->orderBy('created_at', 'desc');
+    }])->findOrFail($id);
 
     }
 
     public function getAuthorDetail($id, $user): Article
     {
-//        $id = (int) $ide;
         $article = Article::where('author', $user->id)->findOrFail($id);
-
         return $article;
     }
 }

@@ -10,6 +10,8 @@ class ArticleDetailResource
 
     public string $title;
 
+    public string $description;
+
     public string $text;
 
     public string $author;

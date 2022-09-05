@@ -11,6 +11,7 @@ class ArticleUpdateRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
+            'description' => 'required|string',
             'text' => 'required|string',
             'sub_only' => 'boolean',
             'comments' => '',
