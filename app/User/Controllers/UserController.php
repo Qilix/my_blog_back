@@ -9,8 +9,7 @@ use App\Common\Models\User;
 use App\User\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Cookie;
-use Carbon\Carbon;
+
 
 
 class UserController extends Controller
@@ -23,21 +22,21 @@ class UserController extends Controller
         ));
 
         return response()->json([
-            'message' => 'You were successfully registered. Use your email and password to sign in.'
+            'message' => 'Вы успешно зарегистрировались.'
         ], 200);
     }
 
 
     public function login(Request $request)
     {
-//        $credentials = $request->only('email', 'password');
-//
-//        if (!Auth::attempt($credentials)) {
-//            return response()->json([
-//                'message' => 'You cannot sign with those credentials',
-//                'errors' => 'Unauthorised'
-//            ], 401);
-//        }
+        $credentials = $request->only('email', 'password');
+
+        if (!Auth::attempt($credentials)) {
+            return response()->json([
+                'message' => 'Неверный email или пароль',
+                'errors' => 'Unauthorised'
+            ], 401);
+        }
 
         $user = User::where('email', $request->get('email'))->firstOrFail();
         Auth::login($user);
