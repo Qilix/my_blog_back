@@ -50,4 +50,9 @@ class ArticleController extends Controller
         $service->deleteArticle($id, $queries, Auth::user());
         return Response::json(['message' => 'Successfully deleted']);
     }
+
+    public function indexByAuthor(ArticleQueries $queries, ArticlePresenter $presenter){
+        $articles = $queries->getArticlesByAuthor(Auth::user());
+        return Response::json(['data'=>$presenter->collect($articles),'total' => $articles->total()]);
+    }
 }

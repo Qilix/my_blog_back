@@ -25,10 +25,12 @@ Route::prefix('posts/{article_id}/comments')->name('comments.')->middleware('aut
  });
 
 Route::prefix('users')->name('users.')->group(function () {
-    Route::middleware('auth:sanctum')->get('', function (Request $request) {
-        return $request->user();
-    });
+
     Route::post('register', [UserController::class, 'register']);
     Route::post('login', [UserController::class, 'login']);
-    Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+    Route::middleware('auth:sanctum')->group(function() {
+        Route::get('articles', [ArticleController::class, 'indexByAuthor']);
+        Route::post('logout', [UserController::class, 'logout']);
+        Route::get('', [UserController::class, 'get']);
+        });
 });

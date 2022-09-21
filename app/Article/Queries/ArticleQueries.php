@@ -26,4 +26,10 @@ class ArticleQueries
         $article = Article::where('author', $user->id)->findOrFail($id);
         return $article;
     }
+
+    public function getArticlesByAuthor($user)
+    {
+        $data = Article::orderBy('id', 'desc')->where('author', $user->id)->paginate(3);
+        return $data;
+    }
 }
