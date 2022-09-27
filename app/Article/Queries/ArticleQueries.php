@@ -29,7 +29,7 @@ class ArticleQueries
 
     public function getArticlesByAuthor($user)
     {
-        $data = Article::orderBy('id', 'desc')->where('author', $user->id)->paginate(3);
+        $data = Article::orderBy('id', 'desc')->where('author', $user->id)->paginate(5);
         return $data;
     }
 }
